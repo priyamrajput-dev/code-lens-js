@@ -1,0 +1,26 @@
+{
+  "name": "code-lens-js-server",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bun run --watch src/server.js",
+    "start": "bun run src/server.js",
+    "ngrok": "ngrok http 8080 --url https://slaw-walnut-showy.ngrok-free.dev",
+    "tunnel": "ngrok http 8080 --url https://slaw-walnut-showy.ngrok-free.dev",
+    "db:seed-indexes": "bun run src/db/indexes.js"
+  },
+  "dependencies": {
+    "@ai-sdk/google": "^4.0.69",
+    "@openrouter/ai-sdk-provider": "^3.0.0",
+    "ai": "^7.0.94",
+    "better-auth": "^1.7.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^8.14.3",
+    "octokit": "^5.0.5",
+    "razorpay": "^2.9.8",
+    "zod": "^4.5.4"
+  }
+}

@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Keys & Certificates
+*.pem
+*.key
+*.cert
+
+# OS
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Cache
+.cache
+.parcel-cache
+.vite/
+
+# IDE
+.vscode/
+.idea/
+
+# Bun
+bun.lock
