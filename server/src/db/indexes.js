@@ -23,7 +23,7 @@
  *   ]
  * }
  *
- * Run: bun run db:seed-indexes
+ * Run: npm run db:seed-indexes
  * (Currently just logs the instructions — Atlas vector indexes
  *  must be created via the Atlas UI or Admin API)
  */

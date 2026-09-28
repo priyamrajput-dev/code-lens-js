@@ -4,11 +4,11 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "bun run --watch src/server.js",
-    "start": "bun run src/server.js",
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
     "ngrok": "ngrok http 8080 --url https://slaw-walnut-showy.ngrok-free.dev",
     "tunnel": "ngrok http 8080 --url https://slaw-walnut-showy.ngrok-free.dev",
-    "db:seed-indexes": "bun run src/db/indexes.js"
+    "db:seed-indexes": "node src/db/indexes.js"
   },
   "dependencies": {
     "@ai-sdk/google": "^4.0.69",

@@ -12,16 +12,16 @@ AI-powered code review platform built with the MERN stack, MVC architecture, and
 | Vector Search | MongoDB Atlas Vector Search |
 | AI | Google Gemini / OpenRouter |
 | Auth | Better Auth + GitHub OAuth |
-| Runtime | Bun |
+| Runtime | Node.js (v20+) |
 
 ## Setup
 
 ```bash
 # Server
-cd server && bun install && bun run dev
+cd server && npm install && npm run dev
 
 # Client
-cd client && bun install && bun run dev
+cd client && npm install && npm run dev
 ```
 
 ## Architecture
