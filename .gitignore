@@ -34,3 +34,6 @@ npm-debug.log*
 
 # Bun
 bun.lock
+
+# Agents & Skills
+.agents/
