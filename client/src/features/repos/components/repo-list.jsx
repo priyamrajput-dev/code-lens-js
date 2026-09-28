@@ -133,18 +133,71 @@ export function RepoList() {
         </div>
       </div>
 
-      {/* Repositories Table */}
-      <Card className="border-border/60 bg-card/80 shadow-sm">
+      {/* Mobile Card List (< sm screens) */}
+      <div className="block sm:hidden space-y-3">
+        {isLoading ? (
+          [...Array(3)].map((_, i) => (
+            <Card key={i} className="p-4 space-y-3">
+              <Skeleton className="h-4 w-36" />
+              <Skeleton className="h-3 w-48" />
+              <Skeleton className="h-8 w-full rounded-lg" />
+            </Card>
+          ))
+        ) : isError ? (
+          <Card className="p-6 text-center text-destructive">
+            <p className="text-sm">Failed to load repositories</p>
+          </Card>
+        ) : visibleRepos.length === 0 ? (
+          <Card className="p-8 text-center text-muted-foreground">
+            <p className="text-sm">No repositories found</p>
+          </Card>
+        ) : (
+          visibleRepos.map(repo => (
+            <Card key={repo.id} className="p-4 space-y-3 border-border/70 interactive-lift">
+              <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0">
+                  <h3 className="font-semibold text-sm text-foreground truncate">{repo.name}</h3>
+                  <p className="text-xs text-muted-foreground font-mono truncate">{repo.fullName}</p>
+                </div>
+                <Badge variant="outline" className="text-[11px] shrink-0">
+                  {repo.visibility === "private" ? "🔒 Private" : "🔓 Public"}
+                </Badge>
+              </div>
+
+              <div className="flex items-center gap-3 text-xs text-muted-foreground font-mono">
+                {repo.language && (
+                  <span className="inline-flex items-center gap-1">
+                    <span className="size-2 rounded-full bg-amber-500" />
+                    {repo.language}
+                  </span>
+                )}
+                <span className="inline-flex items-center gap-1">
+                  <Star className="size-3 text-amber-500" />
+                  {repo.stars}
+                </span>
+                <span>{repo.defaultBranch}</span>
+              </div>
+
+              <div className="pt-1">
+                <SyncRepoButton repoFullName={repo.fullName} branch={repo.defaultBranch} syncStatus={repo.syncStatus} />
+              </div>
+            </Card>
+          ))
+        )}
+      </div>
+
+      {/* Repositories Table (sm: and up) */}
+      <Card className="hidden sm:block border-border/60 bg-card/80 shadow-sm">
         <div className="overflow-x-auto">
           <Table>
             <TableHeader className="bg-secondary-bg/40">
               <TableRow>
                 <TableHead className="font-mono text-xs">Repository</TableHead>
                 <TableHead className="font-mono text-xs">Visibility</TableHead>
-                <TableHead className="font-mono text-xs hidden sm:table-cell">Branch</TableHead>
+                <TableHead className="font-mono text-xs hidden md:table-cell">Branch</TableHead>
                 <TableHead className="font-mono text-xs">Language</TableHead>
                 <TableHead className="text-right font-mono text-xs">Stars</TableHead>
-                <TableHead className="text-right font-mono text-xs hidden sm:table-cell">Updated</TableHead>
+                <TableHead className="text-right font-mono text-xs hidden md:table-cell">Updated</TableHead>
                 <TableHead className="text-right font-mono text-xs">Vector Index</TableHead>
               </TableRow>
             </TableHeader>
@@ -205,7 +258,7 @@ export function RepoList() {
                           </>}
                       </Badge>
                     </TableCell>
-                    <TableCell className="text-xs font-mono text-muted-foreground hidden sm:table-cell">
+                    <TableCell className="text-xs font-mono text-muted-foreground hidden md:table-cell">
                       <span className="bg-muted/60 px-2 py-0.5 rounded border border-border/60 font-mono">
                         {repo.defaultBranch}
                       </span>
@@ -222,7 +275,7 @@ export function RepoList() {
                         {repo.stars}
                       </span>
                     </TableCell>
-                    <TableCell className="text-right text-xs text-muted-foreground font-mono hidden sm:table-cell">
+                    <TableCell className="text-right text-xs text-muted-foreground font-mono hidden md:table-cell">
                       {formatDistanceToNow(new Date(repo.updatedAt), {
                   addSuffix: true
                 })}

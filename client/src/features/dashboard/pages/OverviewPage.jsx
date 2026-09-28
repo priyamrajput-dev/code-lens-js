@@ -97,7 +97,7 @@ export function OverviewPage() {
               </CardContent>
             </Card>)}
         </div> : <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Card className="hover:border-foreground/20 hover:shadow-sm transition-all duration-200 shadow-xs" interactive>
+          <Card className="hover:border-foreground/20 hover:shadow-md transition-all duration-200 shadow-xs interactive-lift stagger-1" interactive>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
                 Reviews Run
@@ -116,7 +116,7 @@ export function OverviewPage() {
             </CardContent>
           </Card>
 
-          <Card className="hover:border-foreground/20 hover:shadow-sm transition-all duration-200 shadow-xs" interactive>
+          <Card className="hover:border-foreground/20 hover:shadow-md transition-all duration-200 shadow-xs interactive-lift stagger-2" interactive>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
                 GitHub Status
@@ -138,7 +138,7 @@ export function OverviewPage() {
             </CardContent>
           </Card>
 
-          <Card className="hover:border-foreground/20 hover:shadow-sm transition-all duration-200 shadow-xs" interactive>
+          <Card className="hover:border-foreground/20 hover:shadow-md transition-all duration-200 shadow-xs interactive-lift stagger-3" interactive>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
                 Vector Indexing
@@ -149,7 +149,7 @@ export function OverviewPage() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold font-mono text-foreground">
-                Pinecone
+                Atlas Vector
               </div>
               <p className="text-xs text-muted-foreground mt-1">
                 Codebase-aware RAG vector search
@@ -157,7 +157,7 @@ export function OverviewPage() {
             </CardContent>
           </Card>
 
-          <Card className="hover:border-foreground/20 hover:shadow-sm transition-all duration-200 shadow-xs" interactive>
+          <Card className="hover:border-foreground/20 hover:shadow-md transition-all duration-200 shadow-xs interactive-lift stagger-4" interactive>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
                 AI Engine

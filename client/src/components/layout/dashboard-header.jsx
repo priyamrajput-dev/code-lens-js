@@ -14,12 +14,12 @@ export function DashboardHeader() {
       <header className="sticky top-0 z-40 w-full border-b border-border/70 bg-background/85 backdrop-blur-xl">
         <div className="flex h-16 items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
           {/* Mobile: hamburger + brand */}
-          <div className="flex items-center gap-2 md:hidden">
-            <button type="button" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-expanded={mobileMenuOpen} aria-controls="dashboard-mobile-nav" aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"} className="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-card text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-              {mobileMenuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
+          <div className="flex items-center gap-3 md:hidden">
+            <button type="button" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-expanded={mobileMenuOpen} aria-controls="dashboard-mobile-nav" aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"} className="inline-flex size-10 min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-border bg-card text-foreground transition-all duration-150 active:scale-95 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
             </button>
 
-            <Link to="/" aria-label="CodeLens home" className="hover:opacity-90 transition-opacity">
+            <Link to="/" aria-label="CodeLens home" className="hover:opacity-90 transition-opacity flex items-center min-h-[44px]">
               <BrandLogo size={28} />
             </Link>
           </div>

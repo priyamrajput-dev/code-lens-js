@@ -15,7 +15,7 @@ export function DashboardShell({
             {/* Main Content Area */}
             <div className="flex-1 flex flex-col h-screen min-w-0 overflow-hidden relative z-10">
                 <DashboardHeader />
-                <main className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 max-w-6xl mx-auto w-full">
+                <main className="@container flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 max-w-6xl mx-auto w-full">
                     <div className="animate-fade-in">{children}</div>
                 </main>
             </div>

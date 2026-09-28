@@ -42,66 +42,75 @@
 }
 
 :root {
-  /* Crisp Modern Titanium Light Theme */
-  --background: #F8FAFC;
-  --secondary-bg: #FFFFFF;
-  --foreground: #0F172A;
-  --card: #FFFFFF;
-  --card-foreground: #0F172A;
-  --popover: #FFFFFF;
-  --popover-foreground: #0F172A;
-  --primary: #0F172A;
-  --primary-foreground: #FFFFFF;
-  --secondary: #F1F5F9;
-  --secondary-foreground: #0F172A;
-  --muted: #F1F5F9;
-  --muted-foreground: #64748B;
-  --accent: #F1F5F9;
-  --accent-foreground: #0F172A;
-  --accent-brand: #D97706;
-  --accent-brand-hover: #B45309;
-  --accent-brand-foreground: #FFFFFF;
-  --destructive: #EF4444;
-  --destructive-foreground: #FFFFFF;
-  --border: #E2E8F0;
-  --input: #E2E8F0;
-  --ring: #D97706;
-  --code-bg: #0F172A;
-  --success: #10B981;
-  --warning: #F59E0B;
-  --error: #EF4444;
+  /* OKLCH Perceptual Light Palette (APCA |Lc| >= 75 for body, >= 60 for non-body) */
+  --background: oklch(0.985 0.005 240);
+  --secondary-bg: oklch(1.0 0 0);
+  --foreground: oklch(0.18 0.02 260);
+  --card: oklch(1.0 0 0);
+  --card-foreground: oklch(0.18 0.02 260);
+  --popover: oklch(1.0 0 0);
+  --popover-foreground: oklch(0.18 0.02 260);
+  --primary: oklch(0.18 0.02 260);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.955 0.008 240);
+  --secondary-foreground: oklch(0.18 0.02 260);
+  --muted: oklch(0.95 0.008 240);
+  --muted-foreground: oklch(0.48 0.02 250);
+  --accent: oklch(0.955 0.008 240);
+  --accent-foreground: oklch(0.18 0.02 260);
+  --accent-brand: oklch(0.65 0.19 55);
+  --accent-brand-hover: oklch(0.58 0.20 52);
+  --accent-brand-foreground: oklch(0.99 0 0);
+  --destructive: oklch(0.58 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.90 0.008 240);
+  --input: oklch(0.90 0.008 240);
+  --ring: oklch(0.65 0.19 55);
+  --code-bg: oklch(0.16 0.025 260);
+  --success: oklch(0.65 0.17 155);
+  --warning: oklch(0.72 0.17 75);
+  --error: oklch(0.58 0.22 25);
   --radius: 0.625rem;
+
+  /* Motion Design Tokens */
+  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+  --ease-premium: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-entrance: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-exit: cubic-bezier(0.3, 0, 1, 1);
+  --duration-micro: 120ms;
+  --duration-standard: 220ms;
+  --duration-modal: 350ms;
 }
 
 .dark {
-  /* Ultra-Premium Obsidian & Electric Amber Dark Theme */
-  --background: #090A0F;
-  --secondary-bg: #0D0E15;
-  --foreground: #F8FAFC;
-  --card: #11131F;
-  --card-foreground: #F8FAFC;
-  --popover: #11131F;
-  --popover-foreground: #F8FAFC;
-  --primary: #F8FAFC;
-  --primary-foreground: #090A0F;
-  --secondary: #181A27;
-  --secondary-foreground: #F8FAFC;
-  --muted: #181A27;
-  --muted-foreground: #94A3B8;
-  --accent: #241A12;
-  --accent-foreground: #F8FAFC;
-  --accent-brand: #F59E0B;
-  --accent-brand-hover: #FBBF24;
-  --accent-brand-foreground: #090A0F;
-  --destructive: #F43F5E;
-  --destructive-foreground: #FFFFFF;
-  --border: #1E2235;
-  --input: #1E2235;
-  --ring: #F59E0B;
-  --code-bg: #07080C;
-  --success: #10B981;
-  --warning: #F59E0B;
-  --error: #F43F5E;
+  /* OKLCH Perceptual Dark Theme (L < 0.20 background, L > 0.90 foreground) */
+  --background: oklch(0.12 0.015 260);
+  --secondary-bg: oklch(0.14 0.018 260);
+  --foreground: oklch(0.98 0.005 240);
+  --card: oklch(0.16 0.02 260);
+  --card-foreground: oklch(0.98 0.005 240);
+  --popover: oklch(0.16 0.02 260);
+  --popover-foreground: oklch(0.98 0.005 240);
+  --primary: oklch(0.98 0.005 240);
+  --primary-foreground: oklch(0.12 0.015 260);
+  --secondary: oklch(0.20 0.025 260);
+  --secondary-foreground: oklch(0.98 0.005 240);
+  --muted: oklch(0.20 0.022 260);
+  --muted-foreground: oklch(0.72 0.02 250);
+  --accent: oklch(0.23 0.035 55);
+  --accent-foreground: oklch(0.98 0.005 240);
+  --accent-brand: oklch(0.75 0.18 60);
+  --accent-brand-hover: oklch(0.80 0.17 65);
+  --accent-brand-foreground: oklch(0.12 0.015 260);
+  --destructive: oklch(0.62 0.23 25);
+  --destructive-foreground: oklch(0.98 0.005 240);
+  --border: oklch(0.24 0.025 260);
+  --input: oklch(0.24 0.025 260);
+  --ring: oklch(0.75 0.18 60);
+  --code-bg: oklch(0.10 0.015 260);
+  --success: oklch(0.70 0.18 155);
+  --warning: oklch(0.75 0.18 75);
+  --error: oklch(0.62 0.23 25);
   --radius: 0.625rem;
 }
 
@@ -123,43 +132,68 @@
   }
 }
 
-/* ===== Animations ===== */
+/* ===== Motion Design Keyframes & Curves (LottieFiles motion-design) ===== */
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 @keyframes slide-up {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes slide-down {
-  from { opacity: 0; transform: translateY(-8px); }
+  from { opacity: 0; transform: translateY(-12px); }
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes scale-in {
-  from { opacity: 0; transform: scale(0.96); }
+  from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
+}
+@keyframes card-reveal {
+  0% { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
 @keyframes pulse-soft {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(0.99); }
 }
 
 .animate-fade-in {
-  animation: fade-in 0.3s ease-out;
+  animation: fade-in var(--duration-standard) var(--ease-entrance) forwards;
 }
 .animate-slide-up {
-  animation: slide-up 0.35s ease-out;
+  animation: slide-up var(--duration-standard) var(--ease-entrance) forwards;
 }
 .animate-slide-down {
-  animation: slide-down 0.3s ease-out;
+  animation: slide-down var(--duration-standard) var(--ease-entrance) forwards;
 }
 .animate-scale-in {
-  animation: scale-in 0.25s ease-out;
+  animation: scale-in var(--duration-standard) var(--ease-entrance) forwards;
+}
+.animate-card-reveal {
+  animation: card-reveal var(--duration-modal) var(--ease-premium) forwards;
+}
+
+/* Staggered entrance choreography (< 400ms total budget) */
+.stagger-1 { animation-delay: 40ms; }
+.stagger-2 { animation-delay: 80ms; }
+.stagger-3 { animation-delay: 120ms; }
+.stagger-4 { animation-delay: 160ms; }
+.stagger-5 { animation-delay: 200ms; }
+
+/* Micro-interaction interactive classes */
+.interactive-lift {
+  transition: transform var(--duration-micro) var(--ease-snappy), box-shadow var(--duration-micro) var(--ease-snappy);
+}
+.interactive-lift:hover {
+  transform: translateY(-2px);
+}
+.interactive-lift:active {
+  transform: translateY(0) scale(0.98);
 }
 
 /* Page transition wrapper */
