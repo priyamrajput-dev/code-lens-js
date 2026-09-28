@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { formatDistanceToNow } from "date-fns";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Lock, Unlock, Star, Search, RefreshCw } from "lucide-react";
+import { Lock, Unlock, Star, Search, RefreshCw, ExternalLink, X } from "lucide-react";
 import { SyncRepoButton } from "./sync-repo-button";
 import { apiFetch } from "@/lib/api-client";
 import { GitHubIcon } from "@/features/auth/components/github-sign-in-form";
@@ -74,11 +74,25 @@ export function RepoList() {
       return true;
     });
   }, [repos, filter, search]);
+  const searchInputRef = useRef(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "/" && document.activeElement?.tagName !== "INPUT" && document.activeElement?.tagName !== "TEXTAREA") {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   const counts = {
     all: repos.length,
     public: repos.filter(r => r.visibility === "public").length,
     private: repos.filter(r => r.visibility === "private").length
   };
+
   if (!isStatusLoading && !isConnected) {
     return <div className="flex flex-col gap-6 animate-fade-in">
         <div>
@@ -128,8 +142,28 @@ export function RepoList() {
           </TabsList>
         </Tabs>
         <div className="relative max-w-sm w-full">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-          <Input placeholder="Search repositories..." className="pl-9 bg-card/70 border-border/60 focus:ring-2 focus:ring-amber-500/30" value={search} onChange={e => setSearch(e.target.value)} />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
+          <Input
+            ref={searchInputRef}
+            placeholder="Search repositories... (/ to focus)"
+            className="pl-9 pr-9 bg-card/70 border-border/60 focus:ring-2 focus:ring-amber-500/30"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
+          {search ? (
+            <button
+              type="button"
+              onClick={() => setSearch("")}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 rounded text-muted-foreground hover:text-foreground cursor-pointer"
+              aria-label="Clear search"
+            >
+              <X className="size-3.5" />
+            </button>
+          ) : (
+            <kbd className="hidden sm:inline-flex absolute right-2.5 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[10px] font-mono text-muted-foreground/70 bg-muted/60 border border-border/70 rounded">
+              /
+            </kbd>
+          )}
         </div>
       </div>
 
@@ -156,7 +190,19 @@ export function RepoList() {
             <Card key={repo.id} className="p-4 space-y-3 border-border/70 interactive-lift">
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0">
-                  <h3 className="font-semibold text-sm text-foreground truncate">{repo.name}</h3>
+                  <div className="flex items-center gap-1.5">
+                    <h3 className="font-semibold text-sm text-foreground truncate">{repo.name}</h3>
+                    <a
+                      href={`https://github.com/${repo.fullName}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-muted-foreground/60 hover:text-foreground inline-flex items-center"
+                      title="Open on GitHub"
+                      aria-label={`Open ${repo.name} on GitHub`}
+                    >
+                      <ExternalLink className="size-3" />
+                    </a>
+                  </div>
                   <p className="text-xs text-muted-foreground font-mono truncate">{repo.fullName}</p>
                 </div>
                 <Badge variant="outline" className="text-[11px] shrink-0">
@@ -241,6 +287,16 @@ export function RepoList() {
                     <TableCell className="font-mono text-sm text-foreground">
                       <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
                         <span className="font-semibold text-sm text-foreground">{repo.name}</span>
+                        <a
+                          href={`https://github.com/${repo.fullName}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-muted-foreground/50 hover:text-foreground inline-flex items-center"
+                          title="Open on GitHub"
+                          aria-label={`Open ${repo.name} on GitHub`}
+                        >
+                          <ExternalLink className="size-3" />
+                        </a>
                         <span className="text-xs text-muted-foreground/70 hidden sm:inline">•</span>
                         <span className="text-xs text-muted-foreground font-mono">{repo.fullName}</span>
                       </div>
