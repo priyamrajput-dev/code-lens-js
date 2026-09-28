@@ -11,7 +11,7 @@ export const SyncRepoButton = ({
   const queryClient = useQueryClient();
   const syncMutation = useMutation({
     mutationFn: async () => {
-      return await apiFetch("/api/repo-sync", {
+      return await apiFetch("/api/repo-sync/trigger", {
         method: "POST",
         body: JSON.stringify({
           repoFullName,

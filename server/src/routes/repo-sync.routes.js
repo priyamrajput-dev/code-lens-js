@@ -14,6 +14,11 @@ const repoSyncService = new RepoSyncService(repoSyncRepository, githubRepository
 const repoSyncController = new RepoSyncController(repoSyncService);
 
 repoSyncRoutes.post(
+  "/",
+  requireAuth,
+  asyncHandler(repoSyncController.triggerSync.bind(repoSyncController))
+);
+repoSyncRoutes.post(
   "/trigger",
   requireAuth,
   asyncHandler(repoSyncController.triggerSync.bind(repoSyncController))

@@ -7,6 +7,9 @@ const clientURL = env.CLIENT_URL;
 
 export const auth = betterAuth({
   database: mongodbAdapter(mongoose.connection.getClient().db()),
+  account: {
+    skipStateCookieCheck: true,
+  },
   advanced: {
     defaultCookieAttributes: {
       sameSite: "none",

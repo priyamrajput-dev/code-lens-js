@@ -11,4 +11,4 @@ const verificationSchema = new mongoose.Schema(
 
 verificationSchema.index({ identifier: 1 });
 
-export const Verification = mongoose.model("Verification", verificationSchema);
+export const Verification = mongoose.model("Verification", verificationSchema, "verification");

@@ -21,6 +21,16 @@ export function createApplication() {
 
   app.use(requestId);
 
+  // Normalize accidental trailing whitespace/encoded spaces in URLs (e.g. from copy-pasting into GitHub settings)
+  app.use((req, res, next) => {
+    const [pathname, search] = req.url.split("?");
+    const cleaned = pathname.replace(/(%20|\s)+$/, "");
+    if (cleaned !== pathname) {
+      req.url = search !== undefined ? `${cleaned}?${search}` : cleaned;
+    }
+    next();
+  });
+
   app.use(
     cors({
       origin: [

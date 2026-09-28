@@ -12,4 +12,4 @@ const sessionSchema = new mongoose.Schema(
 );
 
 sessionSchema.index({ userId: 1 });
-export const Session = mongoose.model("Session", sessionSchema);
+export const Session = mongoose.model("Session", sessionSchema, "session");

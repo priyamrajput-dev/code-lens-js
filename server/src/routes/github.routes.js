@@ -46,6 +46,6 @@ githubRoutes.get(
   asyncHandler(githubController.listRepos.bind(githubController))
 );
 githubRoutes.get(
-  "/callback",
+  ["/callback", "/callback{*path}"],
   asyncHandler(githubController.handleCallback.bind(githubController))
 );

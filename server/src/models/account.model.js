@@ -18,4 +18,4 @@ const accountSchema = new mongoose.Schema(
 
 accountSchema.index({ userId: 1 });
 
-export const Account = mongoose.model("Account", accountSchema);
+export const Account = mongoose.model("Account", accountSchema, "account");
