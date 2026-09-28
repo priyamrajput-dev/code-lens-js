@@ -58,6 +58,7 @@ export function createApplication() {
   app.use("/api/reviews", reviewRoutes);
   app.use("/api/billing", billingRoutes);
   app.use("/api/settings", settingsRoutes);
+  app.get("/api/health", (req, res) => res.json({ status: "ok" }));
 
   // Serve frontend client dist if available
   const clientDistPath = path.resolve(__dirname, "../../client/dist");
