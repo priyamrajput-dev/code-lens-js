@@ -22,6 +22,21 @@ class ReviewsRepository {
       .lean();
   }
 
+  async findByUserScope({ installationIds = [], accountLogin = null }) {
+    const conditions = [];
+    if (installationIds.length > 0) {
+      conditions.push({ installationId: { $in: installationIds } });
+    }
+    if (accountLogin) {
+      conditions.push({ repoFullName: new RegExp(`^${accountLogin}/`, "i") });
+      conditions.push({ authorLogin: accountLogin });
+    }
+    if (conditions.length === 0) return [];
+    return await PullRequest.find({ $or: conditions })
+      .sort({ createdAt: -1 })
+      .lean();
+  }
+
   async upsertPullRequest(data) {
     return await PullRequest.findOneAndUpdate(
       { repoFullName: data.repoFullName, prNumber: data.prNumber },

@@ -99,7 +99,7 @@ export function ReviewHistoryPage() {
                 </Button>
               </Link>
             </div> : <div className="divide-y divide-border/70">
-              {filteredReviews.map(review => <div key={review.id} onClick={() => setSelectedReview(review)} className="group relative flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:px-5 sm:py-4 hover:bg-muted/40 transition-all cursor-pointer gap-3 sm:gap-4">
+              {filteredReviews.map(review => <div key={review.id || review._id} onClick={() => setSelectedReview(review)} className="group relative flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:px-5 sm:py-4 hover:bg-muted/40 transition-all cursor-pointer gap-3 sm:gap-4">
                   {/* Left Column: PR Icon & Details */}
                   <div className="flex items-start sm:items-center gap-3.5 min-w-0 flex-1">
                     <div className="size-9 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform mt-0.5 sm:mt-0">

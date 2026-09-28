@@ -243,10 +243,10 @@ class ReviewsService {
 
   async listReviewsForUser(userId) {
     const installation = await this.githubRepository.findInstallationByUserId(userId);
-    if (!installation?.installationId) {
-      return [];
-    }
-    return await this.reviewsRepository.findByInstallationIds([installation.installationId]);
+    const installationIds = installation?.installationId ? [installation.installationId] : [];
+    const accountLogin = installation?.accountLogin || null;
+
+    return await this.reviewsRepository.findByUserScope({ installationIds, accountLogin });
   }
 
   async analyzeCodeSnippet(data) {
