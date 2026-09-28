@@ -103,12 +103,24 @@ class ReviewsService {
     const owner = parts[0] || "";
     const repo = parts[1] || "";
 
-    await octokit.request("POST /repos/{owner}/{repo}/issues/{issue_number}/comments", {
-      owner,
-      repo,
-      issue_number: prNumber,
-      body,
-    });
+    try {
+      // Post as an official GitHub Pull Request Review (shows in Reviewers section & Files Changed tab)
+      await octokit.request("POST /repos/{owner}/{repo}/pulls/{pull_number}/reviews", {
+        owner,
+        repo,
+        pull_number: prNumber,
+        event: "COMMENT",
+        body,
+      });
+    } catch (err) {
+      console.warn("Pull request review creation failed, falling back to issue comment:", err.message);
+      await octokit.request("POST /repos/{owner}/{repo}/issues/{issue_number}/comments", {
+        owner,
+        repo,
+        issue_number: prNumber,
+        body,
+      });
+    }
   }
 
   async searchContext(namespace, query) {
