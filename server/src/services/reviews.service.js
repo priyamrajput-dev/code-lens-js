@@ -173,7 +173,11 @@ class ReviewsService {
         console.warn("Vector indexing failed for PR chunks:", err);
       }
 
-      const diffSummary = files.map((f) => `### ${f.filePath}\n\`\`\`diff\n${f.patch}\n\`\`\``).join("\n\n");
+      let diffSummary = files.map((f) => `### ${f.filePath}\n\`\`\`diff\n${f.patch}\n\`\`\``).join("\n\n");
+      const MAX_DIFF_LENGTH = 35000;
+      if (diffSummary.length > MAX_DIFF_LENGTH) {
+        diffSummary = diffSummary.slice(0, MAX_DIFF_LENGTH) + "\n\n...[diff truncated for length]";
+      }
       const repoContextSnippets = await this.searchContext(repoNamespace, pr.title);
       const repoContextSection =
         repoContextSnippets.length > 0
@@ -204,8 +208,23 @@ class ReviewsService {
   }
 
   async handleWebhookPayload(payload) {
+    let effectiveInstallationId = payload.installation?.id;
+    let installation = await this.githubRepository.findInstallationByInstallationId(
+      effectiveInstallationId
+    );
+
+    if (!installation && payload.repository?.owner?.login) {
+      const fallback = await this.githubRepository.findInstallationByAccountLogin(
+        payload.repository.owner.login
+      );
+      if (fallback?.installationId) {
+        effectiveInstallationId = fallback.installationId;
+        installation = fallback;
+      }
+    }
+
     const prRecord = await this.reviewsRepository.upsertPullRequest({
-      installationId: payload.installation.id,
+      installationId: effectiveInstallationId,
       repoFullName: payload.repository.full_name,
       prNumber: payload.pull_request.number,
       title: payload.pull_request.title,
@@ -217,10 +236,6 @@ class ReviewsService {
     if (!prRecord) {
       throw new Error("Failed to upsert pull request record");
     }
-
-    const installation = await this.githubRepository.findInstallationByInstallationId(
-      payload.installation.id
-    );
 
     if (installation?.userId) {
       const allowed = await this.billingRepository.canUserReview(installation.userId);

@@ -9,6 +9,10 @@ class GithubRepository {
     return await GithubInstallation.findOne({ installationId }).lean();
   }
 
+  async findInstallationByAccountLogin(accountLogin) {
+    return await GithubInstallation.findOne({ accountLogin }).sort({ updatedAt: -1 }).lean();
+  }
+
   async upsertInstallation(userId, installationId, accountLogin, accountType) {
     return await GithubInstallation.findOneAndUpdate(
       { userId },
